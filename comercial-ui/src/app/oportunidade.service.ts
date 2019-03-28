@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,4 +19,12 @@ export class OportunidadeService {
     return this.httpClient.post(this.apiUrl, oportunidade);
   }
 
-}
+  deletar(id){
+    return this.httpClient.delete(this.apiUrl, id);
+
+
+
+  }
+
+
+  }

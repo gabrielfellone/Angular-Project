@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -32,7 +34,9 @@ public class OportunidadeController {
 	@GetMapping
 	public List<Oportunidade> listar() {
 		return oportunidades.findAll();
+		
 	}
+
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Oportunidade> buscar(@PathVariable Long id) {
@@ -45,6 +49,31 @@ public class OportunidadeController {
 		return ResponseEntity.ok(oportunidade.get());
 	}
 	
+	@DeleteMapping("/{id}")
+	public void deleteOportunidades(@PathVariable Long id) {
+		oportunidades.deleteById(id);
+	}
+	
+
+	
+	
+	@PutMapping("{id}")
+	public ResponseEntity<Object> updateOportunidades(@RequestBody Oportunidade oportunidade, @PathVariable Long id) {
+
+		Optional<Oportunidade> oportunidadeExistente = oportunidades.findById(id);
+
+		if (!oportunidadeExistente.isPresent())
+			return ResponseEntity.notFound().build();
+
+		oportunidade.setId(id);
+		
+		oportunidades.save(oportunidade);
+
+		return ResponseEntity.noContent().build();
+	}
+
+	    
+	    
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Oportunidade adicionar(@Valid @RequestBody Oportunidade oportunidade) {
@@ -60,4 +89,8 @@ public class OportunidadeController {
 		return oportunidades.save(oportunidade);
 	}
 	
+
+	
+
 }
+

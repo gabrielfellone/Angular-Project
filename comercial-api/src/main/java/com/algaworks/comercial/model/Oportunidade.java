@@ -29,7 +29,19 @@ public class Oportunidade {
 
 	@Min(0)
 	private BigDecimal valor;
+	
+	@Min(0)
+	private BigDecimal salario;
+	
+	
+	
+	public BigDecimal getSalario() {
+		return salario;
+	}
 
+	public void setSalario(BigDecimal salario) {
+		this.salario = salario;
+	}
 	public Long getId() {
 		return id;
 	}

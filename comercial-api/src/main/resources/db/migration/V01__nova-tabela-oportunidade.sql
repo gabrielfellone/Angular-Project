@@ -4,5 +4,6 @@ create table oportunidade (
   descricao varchar(200) not null,
   valor decimal(10,2),
 
+
   primary key (id)
 );
